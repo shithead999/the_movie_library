@@ -1,0 +1,192 @@
+<!-- {% extends "base.html" %}
+{% block content %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register Form</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Quicksand", sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #111;
+            width: 100%;
+            overflow: hidden;
+            color: #fff;
+            line-height: 2.3rem;
+        }
+        .ring {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .ring i {
+            position: absolute;
+            inset: 0;
+            border: 2px solid #ffffff; /* Light blue */
+            transition: 0.5s;
+        }
+        .ring i:nth-child(1) {
+            border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+            animation: animate 6s linear infinite;
+        }
+        .ring i:nth-child(2) {
+            border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+            animation: animate 4s linear infinite;
+        }
+        .ring i:nth-child(3) {
+            border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+            animation: animate2 10s linear infinite;
+        }
+        .ring:hover i {
+            border: 6px solid var(--clr);
+            filter: drop-shadow(0 0 20px var(--clr));
+        }
+        @keyframes animate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes animate2 {
+            0% {
+                transform: rotate(360deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+        .login {
+            position: absolute;
+            width: 300px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            /* gap: 20px; */
+        }
+        .login h2 {
+            font-size: 3.5em;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+           margin-bottom: 0;
+        }
+        .login .inputBx {
+            position: relative;
+            width: 100%;
+        }
+        .login .inputBx input {
+            position: relative;
+            width: 100%;
+            padding: 12px 20px;
+            background: transparent;
+            border: 2px solid #fff; /* Light blue */
+            border-radius: 40px;
+            font-size: 1.2em;
+            color: #fff;
+            box-shadow: none;
+            outline: none;
+        }
+        .login .inputBx input[type="submit"] {
+            width: 80%;
+            background: #0078ff;
+            background: #1a355b; 
+            border: none;
+            cursor: pointer;
+            padding: 12px 20px;
+            font-size: 1.2em;
+            border-radius: 40px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            margin-top: 10px;
+        }
+        .login .inputBx input[type="submit"]:hover {
+            background: linear-gradient(45deg, #0099ff, #4e6bff); /* Reverse gradient */
+            transform: scale(1.05);
+        }
+        .login .inputBx input::placeholder {
+            color: rgb(0, 0, 0);
+        }
+        .login .links {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .login .links a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .elem {
+            font-size: 1.3em;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+        .elem label {
+            font-weight: bold;
+            margin-bottom: 8px; /* Add margin to separate label and input */
+        }
+        a{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="ring">
+        <i style="--clr:#4e6bff;"></i> <!-- Light blue -->
+        <i style="--clr:#c0caff;"></i> <!-- Light blue -->
+        <i style="--clr:#112fca;"></i> <!-- Light blue -->
+        <div class="login">
+            <h2>Register</h2>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="elem">
+                    {{ form.username.label }} 
+                    {{ form.username(size=32) }}
+                </div>
+                <div class="elem">
+                    {{ form.email.label }} 
+                    {{ form.email(size=32) }}
+                </div>
+                <div class="elem">
+                    {{ form.password.label }} 
+                    {{ form.password(size=32) }}
+                </div>
+                <div class="elem">
+                    {{ form.confirm_password.label }} 
+                    {{ form.confirm_password(size=32) }}
+                </div>
+                <div class="inputBx">
+                    {{ form.submit() }}
+                </div>
+               <p>Already registered? <a href="{{ url_for('users.login') }}">Login</a></p>
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+<!-- {% endblock %} -->

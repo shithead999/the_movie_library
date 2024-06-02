@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SignIn Form</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://lottie.host/785010ec-c50a-4459-97da-683665dcb301/S54yFQjHoq.json">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Quicksand", sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #111;
+            width: 100%;
+            overflow: hidden;
+            color: #fff;
+            line-height: 2.3rem;
+        }
+
+        .ring {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ring i {
+            position: absolute;
+            inset: 0;
+            border: 2px solid #ffffff;
+            /* Light blue */
+            transition: 0.5s;
+        }
+
+        .ring i:nth-child(1) {
+            border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+            animation: animate 6s linear infinite;
+        }
+
+        .ring i:nth-child(2) {
+            border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+            animation: animate 4s linear infinite;
+        }
+
+        .ring i:nth-child(3) {
+            border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+            animation: animate2 10s linear infinite;
+        }
+
+        .ring:hover i {
+            border: 6px solid var(--clr);
+            filter: drop-shadow(0 0 20px var(--clr));
+        }
+
+        @keyframes animate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes animate2 {
+            0% {
+                transform: rotate(360deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .login {
+            position: absolute;
+            width: 300px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .login h2 {
+            font-size: 3em;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            padding-bottom: 15px;
+        }
+
+        .login .inputBx {
+            position: relative;
+            width: 100%;
+        }
+
+        .login .inputBx input {
+            position: relative;
+            width: 100%;
+            padding: 12px 20px;
+            background: transparent;
+            border: 2px solid #fff;
+            /* Light blue */
+            border-radius: 40px;
+            font-size: 1.2em;
+            color: #fff;
+            box-shadow: none;
+            outline: none;
+        }
+
+        .login .inputBx input[type="submit"] {
+            width: 80%;
+            background: #0078ff;
+            background: linear-gradient(45deg, #4e6bff, #0099ff);
+            /* Gradient from light blue to dark blue */
+            border: none;
+            cursor: pointer;
+            padding: 12px 20px;
+            font-size: 1.2em;
+            border-radius: 40px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .login .inputBx input[type="submit"]:hover {
+            background: linear-gradient(45deg, #0099ff, #4e6bff);
+            /* Reverse gradient */
+            transform: scale(1.05);
+        }
+
+        .login .inputBx input::placeholder {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .login .links {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Center the register link */
+            padding: 0 20px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .login .links a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .elem {
+            font-size: 1.5em;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .elem label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            /* Add margin to separate label and input */
+        }
+
+
+        #loader {
+            height: 100%;
+            width: 100%;
+            background-color: #000;
+            position: fixed;
+            z-index: 999;
+            top: 0;
+            transition: all ease 0.7s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #loader h1 {
+            font-size: 4vw;
+            color: transparent;
+            background: linear-gradient(to right, #c0caff, #4e6bff, #112fca);
+            -webkit-background-clip: text;
+            position: absolute;
+            opacity: 0;
+            animation-name: load;
+            animation-duration: 5s;
+            animation-delay: 1s;
+            animation-timing-function: linear;
+        }
+
+        @keyframes load {
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @media (max-width:600px) {
+            #loader h1 {
+                font-size: 9vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loader">
+        <h1>EXPLORE CINEMATIC TREASURES <iframe
+                src="https://lottie.host/embed/dfc8de3a-4783-4731-a047-17e7e7f71c78/kNPHhOWR1m.json"
+                frameborder="0"></iframe> </h1>
+
+    </div>
+    <div class="ring">
+        <i style="--clr:#4e6bff;"></i> <!-- Light blue -->
+        <i style="--clr:#c0caff;"></i> <!-- Light blue -->
+        <i style="--clr:#112fca;"></i> <!-- Light blue -->
+        <div class="login">
+            <h2>Login</h2>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="elem">
+                    {{ form.email.label }}
+                    {{ form.email(size=32) }}
+                </div>
+                <div class="elem">
+                    {{ form.password.label }}
+                    {{ form.password(size=32) }}
+                </div>
+                <div>
+                    {{ form.remember() }}
+                    {{ form.remember.label }}
+                </div>
+                <div class="inputBx">
+                    {{ form.submit() }}
+                </div>
+                <div class="links">
+                    <a href="{{ url_for('users.register') }}">Register</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+
+        function loaderAnimation() {
+            var loader = document.querySelector("#loader")
+            setTimeout(function () {
+                loader.style.top = "-100%"
+            }, 3200);
+        }
+        loaderAnimation()
+    </script>
+
+</body>
+
+</html>

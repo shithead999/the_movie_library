@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    input[type="text"] {
+        width: 500px;
+        height: 1em;
+        padding: 0.8em;
+        font-size: 1.2em;
+    }
+
+    .list_movie_card {
+        border: 1px solid #1a355b !important;
+    }
+
+    .list_movie_card,
+    .search_results_movie_card {
+        width: 250px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .search_results_movies {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .search_results_movie_card {
+        flex: 0 0 calc(16.666% - 20px);
+        /* Adjust the width as needed */
+        /* 16.666% represents approximately 1/6th of the container width */
+        margin: 10px;
+        /* Adjust margin as needed */
+        height: 300px;
+    }
+
+
+    /* Ensure footer is at bottom of the page */
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        /* Ensure body takes up at least the full viewport height */
+        margin: 0;
+        padding: 0;
+    }
+
+    #movie_list_container {
+        flex: 1;
+        /* Grow to fill remaining space */
+    }
+
+    footer {
+        background-color: #1a355b;
+        color: #ffffff;
+        text-align: center;
+        padding: 10px 0;
+        width: 100%;
+    }
+
+    a {
+        text-decoration: none;
+        /* Remove text decoration */
+        color: white;
+        /* Set button text color */
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+</style>
+
+<body>
+    <div id="movie_list_container">
+        <h1>{{ list.title.title() }}</h1>
+        <p>Created On : {{ list.date_created.strftime("%Y-%m-%d") }}</p>
+        <div>
+            <form action="{{ url_for('main.search', list_id=list.id, page=1) }}" method="POST">
+                <input type="text" name="query" placeholder="Search for movies" value="{{ prev_query|default('') }}">
+                <button type="submit" class="search_button">Search</button>
+            </form>
+        </div>
+        <h2>Movies in this list</h2>
+        <div class="list_movies">
+            {% if list.movies %}
+            {% for movie in list.movies %}
+            <div class="list_movie_card">
+                <h3>{{ movie.title }}</h3>
+                <p>{{ movie.year }}</p>
+                <a href="{{ url_for('main.movie_detail', imdb_id=movie.imdb_id) }}">
+                    <button class="search_button excess_button">
+                        Open
+                    </button>
+                </a>
+                <a href="{{ url_for('main.delete_movie', imdb_id=movie.imdb_id, list_id=list.id) }}">
+                    <button class="search_button excess_button">
+                        Delete
+                    </button>
+                </a>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>List is empty</p>
+            {% endif %}
+        </div>
+        <h2>Search Results</h2>
+        <div class="search_results_movies">
+            {% if movies %}
+            {% for movie in movies %}
+            <div class="search_results_movie_card">
+                <img src="{{ movie.Poster }}" alt="{{ movie.Title }}">
+                <h4>{{ movie.Title }}</h4>
+                <p>{{ movie.Year }}</p>
+                <form action="{{ url_for('main.add_movie') }}" method="POST">
+                    <input type="hidden" name="page" value="{{ curr_page|default(1) }}">
+                    <input type="hidden" name="query" value="{{ prev_query|default('') }}">
+                    <input type="hidden" name="title" value="{{ movie.Title }}">
+                    <input type="hidden" name="year" value="{{ movie.Year }}">
+                    <input type="hidden" name="imdb_id" value="{{ movie.imdbID }}">
+                    <input type="hidden" name="list_id" value="{{ list.id }}">
+                    <button type="submit" class="search_button excess_button">Add to List</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        <form action="{{ url_for('main.search', list_id=list.id, page=curr_page|default(1)|int + 1) }}" method="POST">
+            <button type="submit" class="search_button excess_button">Show More</button>
+            <input type="hidden" name="query" value="{{ prev_query|default('') }}">
+        </form>
+        {% else %}
+        <p>No search results</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>
+{% endblock %}

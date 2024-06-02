@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ detail.Title }}</title>
+    <style>
+        body {
+            background: hsla(215, 56%, 23%, 1);
+
+            background: linear-gradient(90deg, hsla(215, 56%, 23%, 1) 36%, hsla(58, 16%, 49%, 1) 100%);
+
+            background: -moz-linear-gradient(90deg, hsla(215, 56%, 23%, 1) 36%, hsla(58, 16%, 49%, 1) 100%);
+
+            background: -webkit-linear-gradient(90deg, hsla(215, 56%, 23%, 1) 36%, hsla(58, 16%, 49%, 1) 100%);
+
+            filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#1A355B", endColorstr="#908F69", GradientType=1);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: rgb(255, 253, 253);
+            overflow-y: scroll;
+        }
+
+        /* 
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+            font-size: 4em;
+        } */
+        /* 
+        .title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .poster {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 0.2em;
+        }
+
+        .rating,
+        .genre,
+        .runtime,
+        .director,
+        .actors,
+        .language,
+        .country {
+            margin: 5px 0;
+        }
+
+        .details {
+            padding: 15px;
+            font-size: larger;
+            color: white;
+
+        }
+
+        .plot {
+            margin-top: 20px;
+        } */
+
+        #movie_container {
+            display: flex;
+            flex-grow: 1;
+            width: 100%;
+            height: 70vh;
+        }
+
+        .movie_left {
+            width: 33.33%;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .movie_right {
+            width: 66.66%;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: left;
+            height: 100%;
+            flex-grow: 1;
+            font-size: 1.2em;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-top: 1em;
+            font-weight: bold;
+        }
+
+        .poster {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 0.2em;
+        }
+
+        .rating,
+        .genre,
+        .runtime,
+        .director,
+        .actors,
+        .language,
+        .country {
+            margin: 5px 0;
+            font-size: inherit;
+        }
+
+        .details {
+            padding: 15px;
+            font-size: larger;
+            color: white;
+        }
+
+        .plot {
+            margin-top: 20px;
+            max-width: 50vw;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="title">{{ detail.Title }}</p>
+
+    <div id="movie_container">
+        <div class="movie_left">
+            <img class="poster" src="{{ detail.Poster }}" alt="{{ detail.Title }}">
+        </div>
+        <div class="movie_right">
+            <div class="rating"><b>IMDb Rating:</b> {{ detail.imdbRating }}</div>
+            <div class="genre"><b>Genre:</b> {{ detail.Genre }}</div>
+            <div class="runtime"><b>Runtime:</b> {{ detail.Runtime }}</div>
+            <div class="director"><b>Director:</b> {{ detail.Director }}</div>
+            <div class="actors"><b>Actors:</b> {{ detail.Actors }}</div>
+            <div class="language"><b>Language:</b> {{ detail.Language }}</div>
+            <div class="country"><b>Country:</b> {{ detail.Country }}</div>
+            <div class="plot"><strong>Plot:</strong> {{ detail.Plot }}</div>
+        </div>
+</body>
+
+</html>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Movie Library</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <nav>
+        <p class="app_heading">The Movie Library</p>
+        <ul>
+            {% if current_user.is_authenticated %}
+            <p class="username">Hi,&nbsp;{{ current_user.username }}</p>
+
+            <button class="cssbuttons-io">
+                <a href="{{ url_for('main.home') }}">
+                    <span>
+                        <p>Home</p>
+                        <svg viewBox="0 3 19.7 19.7" xmlns="http://www.w3.org/2000/svg" role="img"
+                            aria-labelledby="homeIconTitle" class="home-icon">
+                            <path d="M12 3l7 6-1 1-1-1V20h-4V14H9v6H5V9L4 10 3 9l9-6z" fill="white" />
+                        </svg>
+                    </span>
+                </a>
+            </button>
+
+            <button class="cssbuttons-io">
+                <a href="{{ url_for('users.logout') }}">
+                    <span>
+                        <p>Logout</p>
+                        <svg viewBox="0 2 19 20" xmlns="http://www.w3.org/2000/svg" role="img"
+                            aria-labelledby="loginIconTitle" class="login-icon">
+                            <path fill="white"
+                                d="M10.09,15.59L13.67,12L10.09,8.41L11.5,7L16.5,12L11.5,17L10.09,15.59M19,3H5C3.89,3 3,3.89 3,5V19C3,20.11 3.89,21 5,21H19C20.11,21 21,20.11 21,19V5C21,3.89 20.11,3 19,3M19,19H5V5H19V19Z" />
+                        </svg>
+                    </span>
+                </a>
+            </button>
+
+            {% else %}
+            <li><a href="{{ url_for('users.login') }}">Login</a></li>
+            <li><a href="{{ url_for('users.register') }}">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+
+    <script>
+        alert("{{ message }}")
+    </script>
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+    <!-- 
+    <footer>
+        &copy; 2024 Movie Library. All rights reserved.
+    </footer> -->
+</body>
+
+</html>

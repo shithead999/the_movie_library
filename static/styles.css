@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Anta&family=Sevillana&display=swap');
+
+.search_results_movie_card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    /* set a fixed width for each card */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search_results_movie_card img {
+    width: 100%;
+    /* make the image take up the full width of the card */
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.search_results_movie_card h3,
+.search_results_movie_card p {
+    margin: 10px 0;
+}
+
+.search_results_movie_card button {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.search_results_movies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.list_movies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: left;
+}
+
+.list_movie_card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    /* set a fixed width for each card */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.list_movie_card h3 {
+    text-decoration: none;
+}
+
+
+.list_movie_card:hover {
+    background-color: azure;
+}
+
+
+#movie_list_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+body {
+    background-color: #f0f5f9;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+nav {
+    background-color: #1a355b;
+    padding: 0.1em;
+    text-align: right;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.left-column {
+    flex: 1;
+    background-color: #ffffff;
+    /* White background */
+    padding: 20px;
+}
+
+.right-column {
+    flex: 1;
+    background-color: #ffffff;
+    /* White background */
+    padding: 20px;
+    border-left: 2px solid #ccc;
+    /* Partition line */
+}
+
+form {
+    margin-top: 20px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    align-content: center;
+}
+
+/* Button styles */
+.cssbuttons-io {
+    position: relative;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    border: none;
+    background: linear-gradient(to right, #143d65, #5e84ab);
+    /* Updated button background color */
+    color: ghostwhite;
+    overflow: hidden;
+    box-shadow: none;
+    padding: 0em 1.6em 0em 1.6em;
+    margin-right: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cssbuttons-io svg {
+    width: 1.2em;
+    height: 1.2em;
+    /* stroke-width: 2px; */
+}
+
+.cssbuttons-io span {
+    position: relative;
+    z-index: 10;
+    transition: color 0.25s;
+    display: flex;
+    align-items: center;
+    /* padding: 0.3em 0em 0.3em 0em; */
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+    /* margin-top: 1em; */
+}
+
+.cssbuttons-io::before,
+.cssbuttons-io::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.cssbuttons-io::before {
+    content: "";
+    background: #1a355b;
+    width: 140%;
+    left: 0%;
+    transform: skew(30deg);
+    transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.cssbuttons-io:hover::before {
+    transform: translate3d(100%, 0, 0);
+}
+
+.cssbuttons-io:active {
+    transform: scale(1);
+}
+
+.cssbuttons-io svg {
+    margin-left: 5px;
+    /* Adjust the margin as needed */
+}
+
+
+.search_button {
+    background-color: #1a355b;
+    color: white;
+    border-radius: 8em;
+    font-size: 1em;
+    /* Adjust font size */
+    font-weight: 600;
+    padding: 1em 1.4em 1em 1.4em;
+    /* Adjust padding as needed */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    margin: 5px;
+    text-decoration: none;
+    /* Remove text decoration */
+    display: inline-block;
+    /* Ensure button is displayed as a block element */
+}
+
+.search_button:hover {
+    transform: translateY(-4px) translateX(-2px);
+    box-shadow: 2px 5px 0 0 black;
+}
+
+.search_button:active {
+    transform: translateY(2px) translateX(1px);
+    box-shadow: 0 0 0 0 black;
+}
+
+.excess_button {
+    font-size: 0.8em;
+}
+
+.username {
+    font-size: 1.5em;
+    color: white;
+    font-family: "Acme";
+    margin-right: 1.3em;
+    font-weight: bold;
+}
+
+.app_heading {
+    font-family: "Acme";
+    margin-left: 1.5em;
+    font-weight: bolder;
+    color: white;
+    font-size: 2em;
+
+}
